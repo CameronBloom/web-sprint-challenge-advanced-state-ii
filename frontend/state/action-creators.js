@@ -1,18 +1,29 @@
 // dispatched actions explicitly handle all state changes
 // dispatched actions are processed by the reducer
 import axios from "axios";
-import { SET_SELECTED_ANSWER, SET_INFO_MESSAGE, SET_QUIZ_INTO_STATE, INPUT_CHANGE, RESET_FORM } from "./action-types";
+import { MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE, SET_SELECTED_ANSWER, SET_INFO_MESSAGE, SET_QUIZ_INTO_STATE, INPUT_CHANGE, RESET_FORM } from "./action-types";
 
 
 // ❗ You don't need to add extra action creators to achieve MVP
+// complete
+export function moveClockwise(nextPosition) {
+  return ({type: MOVE_CLOCKWISE, payload: nextPosition})
+}
+
+// complete
+export function moveCounterClockwise(nextPosition) {
+  return ({type: MOVE_COUNTERCLOCKWISE, payload: nextPosition})
+}
+
+
 export function selectAnswer(selection) { 
   console.log(`action: selecting answer...`)
-  return({ type: SET_SELECTED_ANSWER, payload: selection})
+  return ({ type: SET_SELECTED_ANSWER, payload: selection})
 }
 
 export function setMessage(message) { 
   console.log(`action: setting message...`)
-  return({ type: SET_INFO_MESSAGE, payload: message })
+  return ({ type: SET_INFO_MESSAGE, payload: message })
 }
 
 export function setQuiz(quiz) { 
@@ -66,7 +77,11 @@ export function postQuiz(question_text, true_text, false_text) {
       "question_text": question_text, 
       "true_answer_text": true_text, 
       "false_answer_text": false_text })
-      .then(res => dispatch(setMessage(`Congrats: "${res.data.question}" is a great question!`)))
+      .then(res => {
+        // console.log(res);
+        dispatch(setMessage(`Congrats: "${res.data.question}" is a great question!`));
+        dispatch(setQuiz(res.data));
+      })
       .then(dispatch(resetForm()))
 
   }

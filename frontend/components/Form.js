@@ -21,11 +21,11 @@ function Form(props) {
       <input maxLength={50} onChange={onChange} id="newFalseAnswer" placeholder="Enter false answer" value={props.form.newFalseAnswer} />
       <button 
         id="submitNewQuizBtn"
-        disabled={ props.form.newQuestion.trim().length < 1 }
-        // disabled={
-        //   props.form.newQuestion.trim().length < 1 &&
-        //   props.form.newTrueAnswer.trim().length < 1 &&
-        //   props.form.newFalseAnswer.trim().length < 1 }
+        disabled={ 
+          props.form.newQuestion.trim().length < 1 ||
+          props.form.newTrueAnswer.trim().length < 1 ||
+          props.form.newFalseAnswer.trim().length < 1 
+        }
       >Submit new quiz</button>
     </form>
   )
