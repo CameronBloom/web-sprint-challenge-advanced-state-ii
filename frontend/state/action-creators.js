@@ -7,11 +7,13 @@ import { MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE, SET_SELECTED_ANSWER, SET_INFO_ME
 // ❗ You don't need to add extra action creators to achieve MVP
 // complete
 export function moveClockwise(nextPosition) {
+  console.log(`action: moving clockwise...`)
   return ({type: MOVE_CLOCKWISE, payload: nextPosition})
 }
 
 // complete
 export function moveCounterClockwise(nextPosition) {
+  console.log(`action: moving counter_clockwise...`)
   return ({type: MOVE_COUNTERCLOCKWISE, payload: nextPosition})
 }
 
