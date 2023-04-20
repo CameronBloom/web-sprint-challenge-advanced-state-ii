@@ -82,7 +82,7 @@ export function postQuiz(question_text, true_text, false_text) {
       .then(res => {
         // console.log(res);
         dispatch(setMessage(`Congrats: "${res.data.question}" is a great question!`));
-        dispatch(setQuiz(res.data));
+        // dispatch(setQuiz(res.data));
       })
       .then(dispatch(resetForm()))
 
