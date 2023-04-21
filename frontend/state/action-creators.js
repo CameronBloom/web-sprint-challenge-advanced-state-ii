@@ -50,6 +50,7 @@ export function fetchQuiz() {
     console.log(`async action: fetching quiz...`)
     axios.get("http://localhost:9000/api/quiz/next")
       .then(res => dispatch(setQuiz(res.data)))
+      .catch(err => console.error(err));
   }
 }
 export function postAnswer(quiz, answer) {
@@ -59,14 +60,12 @@ export function postAnswer(quiz, answer) {
     // - Dispatch an action to set the server message to state
     // - Dispatch the fetching of the next quiz
     console.log(`async action: posting answer...`)
-    console.log(`quiz_id: ${quiz}`)
-    console.log(`answer: ${answer}`)
-
     axios.post("http://localhost:9000/api/quiz/answer", { "quiz_id": quiz, "answer_id": answer })
         .then(dispatch(selectAnswer(null)))
-        .then(res => dispatch(setMessage(res.data.message)))
         .then(dispatch(setQuiz(null)))
-        .then(dispatch(fetchQuiz()))
+        .then(res => dispatch(setMessage(res.data.message)))
+        .catch(err => console.error(err))
+        .finally(dispatch(fetchQuiz()))
   }
 }
 export function postQuiz(question_text, true_text, false_text) {
@@ -74,18 +73,17 @@ export function postQuiz(question_text, true_text, false_text) {
     // On successful POST:
     // - Dispatch the correct message to the the appropriate state
     // - Dispatch the resetting of the form
+
     console.log(`async action: posting quiz...`)
     axios.post("http://localhost:9000/api/quiz/new", { 
       "question_text": question_text, 
       "true_answer_text": true_text, 
       "false_answer_text": false_text })
       .then(res => {
-        // console.log(res);
         dispatch(setMessage(`Congrats: "${res.data.question}" is a great question!`));
-        // dispatch(setQuiz(res.data));
+        dispatch(resetForm());
       })
-      .then(dispatch(resetForm()))
-
+      .catch(err => console.error(err))
   }
 }
 // ❗ On promise rejections, use log statements or breakpoints, and put an appropriate error message in state

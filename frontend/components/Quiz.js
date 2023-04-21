@@ -41,7 +41,6 @@ function Quiz(props) {
             <button 
               id="submitAnswerBtn"
               disabled={ !props.selectedAnswer && props.selectedAnswer !== 0 }
-              // onClick={ () => postAnswer("qqqqq", "zzzz") }
               onClick={ () => handlePostAnswer() }
             >Submit answer</button>
           </>
