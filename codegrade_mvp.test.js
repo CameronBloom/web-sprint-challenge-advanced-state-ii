@@ -228,6 +228,7 @@ describe('Advanced State Sprint Challenge Submission', () => {
     test(`[13] Successful submit of new quiz
         - Adds the quiz to the roster of quizzes,  Review how to use axios to make POST requests.
     `, async () => {
+      console.log(`=== [13] ===`)
       // submit new quiz
       fireEvent.change(newQuestionInput(), { target: { value: 'foobarbaz?' } })
       fireEvent.change(newTrueAnswerInput(), { target: { value: 'bar' } })

@@ -41,12 +41,11 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
   }
 }
 
-
 const initialMessageState = ''
 function infoMessage(state = initialMessageState, action) {
-  console.log(`reducer: setting message into state...`)
   switch(action.type) {
     case SET_INFO_MESSAGE:
+      console.log(`reducer: setting message into state...`)
       return action.payload
     default:
       return state

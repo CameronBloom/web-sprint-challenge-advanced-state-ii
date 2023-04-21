@@ -50,7 +50,7 @@ export function fetchQuiz() {
     console.log(`async action: fetching quiz...`)
     axios.get("http://localhost:9000/api/quiz/next")
       .then(res => dispatch(setQuiz(res.data)))
-      .catch(err => console.error(err));
+      .catch(err => console.error(err))
   }
 }
 export function postAnswer(quiz, answer) {
@@ -61,21 +61,20 @@ export function postAnswer(quiz, answer) {
     // - Dispatch the fetching of the next quiz
     console.log(`async action: posting answer...`)
     axios.post("http://localhost:9000/api/quiz/answer", { "quiz_id": quiz, "answer_id": answer })
-        .then(dispatch(selectAnswer(null)))
-        .then(dispatch(setQuiz(null)))
-        .then(res => dispatch(setMessage(res.data.message)))
-        .catch(err => console.error(err))
-        .finally(dispatch(fetchQuiz()))
+      .then(dispatch(selectAnswer(null)))  
+      .then(res => dispatch(setMessage(res.data.message)))    
+      .catch(err => console.error(err))
+      .finally(dispatch(fetchQuiz()))
   }
 }
+
 export function postQuiz(question_text, true_text, false_text) {
-  return function (dispatch) {
+  return async function (dispatch) {
     // On successful POST:
     // - Dispatch the correct message to the the appropriate state
     // - Dispatch the resetting of the form
-
     console.log(`async action: posting quiz...`)
-    axios.post("http://localhost:9000/api/quiz/new", { 
+    await axios.post("http://localhost:9000/api/quiz/new", { 
       "question_text": question_text, 
       "true_answer_text": true_text, 
       "false_answer_text": false_text })
