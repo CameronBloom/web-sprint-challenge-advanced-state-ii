@@ -7,16 +7,13 @@ function Quiz(props) {
 
   // run fetchQuiz once on load
   useEffect(() => {
-    console.log(`use effect triggered...`)
+    // console.log(`use effect triggered...`)
     { !props.quiz ? props.fetchQuiz() : console.log(props) }
   }, []);
 
   const handlePostAnswer = () => {
     const quizId = props.quiz.quiz_id;
     const answerId = props.quiz.answers[props.selectedAnswer]["answer_id"];
-    console.log(`cameron: Quiz Component => handlePostAnswer() triggered`)
-    console.log(`cameron: Quiz Component => quizId: ${quizId}`)
-    console.log(`cameron: Quiz Component => answerId: ${answerId}`)
     props.postAnswer(quizId, answerId);
   }
   

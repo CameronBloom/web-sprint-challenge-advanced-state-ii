@@ -228,7 +228,7 @@ describe('Advanced State Sprint Challenge Submission', () => {
     test(`[13] Successful submit of new quiz
         - Adds the quiz to the roster of quizzes,  Review how to use axios to make POST requests.
     `, async () => {
-      console.log(`=== [13] ===`)
+      console.log(`===== [13] =====`)
       // submit new quiz
       fireEvent.change(newQuestionInput(), { target: { value: 'foobarbaz?' } })
       fireEvent.change(newTrueAnswerInput(), { target: { value: 'bar' } })
@@ -262,12 +262,15 @@ describe('Advanced State Sprint Challenge Submission', () => {
       // await question 4
       await screen.findByText('foobarbaz?', queryOptions, waitForOptions)
 
+      
+
     })
   })
   describe('[APP STATE]', () => {
     test(`[14] The state of the wheel survives route changes:
         - Moving the wheel, navigating away and back, should keep the position of the "B", Review how to persist state using global state with redux.
     `, async () => {
+      console.log(`===== [14] =====`)
       testCogs(0)
       fireEvent.click(clockwiseBtn())
       testCogs(1)
