@@ -228,49 +228,33 @@ describe('Advanced State Sprint Challenge Submission', () => {
     test(`[13] Successful submit of new quiz
         - Adds the quiz to the roster of quizzes,  Review how to use axios to make POST requests.
     `, async () => {
-      console.log(`===== [13] =====`)
-      // submit new quiz
       fireEvent.change(newQuestionInput(), { target: { value: 'foobarbaz?' } })
       fireEvent.change(newTrueAnswerInput(), { target: { value: 'bar' } })
       fireEvent.change(newFalseAnswerInput(), { target: { value: 'baz' } })
       fireEvent.click(submitNewQuizBtn())
       await screen.findByText('Congrats: "foobarbaz?" is a great question!', queryOptions, waitForOptions)
-
-      // navigate to the quiz page
       fireEvent.click(quizLink())
-
-      // await question 1
       await screen.findByText(WhatIsClosure, queryOptions, waitForOptions)
       let answerA = screen.queryByText(AFunction, queryOptions)
       fireEvent.click(answerA.querySelector('button'))
       fireEvent.click(submitAnswerBtn())
-
-      // await question 2
       await screen.findByText(WhatIsPromise, queryOptions, waitForOptions)
       screen.getByText(ThatIsCorrect, queryOptions) // error - query inside the document.body for a substring containing 'That was the correct answer'
       answerA = screen.queryByText(AValue, queryOptions)
       fireEvent.click(answerA.querySelector('button'))
       fireEvent.click(submitAnswerBtn())
-
-      // await question 3
       await screen.findByText(WhatIsModule, queryOptions, waitForOptions)
       screen.getByText(ThatIsCorrect, queryOptions) // error - query inside the document.body for a substring containing 'That was the correct answer'
       answerA = screen.queryByText(AFile, queryOptions)
       fireEvent.click(answerA.querySelector('button'))
       fireEvent.click(submitAnswerBtn())
-
-      // await question 4
       await screen.findByText('foobarbaz?', queryOptions, waitForOptions)
-
-      
-
     })
   })
   describe('[APP STATE]', () => {
     test(`[14] The state of the wheel survives route changes:
         - Moving the wheel, navigating away and back, should keep the position of the "B", Review how to persist state using global state with redux.
     `, async () => {
-      console.log(`===== [14] =====`)
       testCogs(0)
       fireEvent.click(clockwiseBtn())
       testCogs(1)
